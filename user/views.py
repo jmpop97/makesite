@@ -2,7 +2,7 @@ from django.shortcuts import render
 from . forms import PostForm
 from django.contrib.auth import views, models, login
 from django.shortcuts import render, redirect
-from . forms import UserForm,UserForm1
+from . forms import UserForm,UserForm1,UserForm2
 from django.http import HttpResponse
 # Create your views here.
 def create_user_view(request):
@@ -18,16 +18,11 @@ def signup(request):
         form = UserForm(request.POST)
 
         if form.is_valid():  # 2
-            new_user = models.User.objects.create_user(**form.cleaned_data)  # 5
-            login(request, new_user)
-
-        return redirect('user/create_user.html')
-
-    else:  # 3
+            form.save()
+        else:
+            print(form.errors)
+    else:
         form = UserForm()
-    print("form.as_p")
-    print(type(form))
-    print(form)
     return render(request, 'user/create_user2.html', {'form': form})  # 4
 
 def signup1(request):
@@ -43,3 +38,19 @@ def signup1(request):
     else:
         form = UserForm1()
     return render(request, 'user/create_user2.html',{'form':form})
+def signup2(request):
+    if request.method == "POST":  # 1
+        form = UserForm2(request.POST)
+
+        if form.is_valid():  # 2
+            new_user = models.User.objects.create_user(**form.cleaned_data)  # 5
+            login(request, new_user)
+
+        return redirect('user/create_user.html')
+
+    else:  # 3
+        form = UserForm2()
+    print("form.as_p")
+    print(type(form))
+    print(form)
+    return render(request, 'user/create_user2.html', {'form': form})  # 4

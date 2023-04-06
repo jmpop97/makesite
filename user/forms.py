@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-
+from django.forms.widgets import PasswordInput
+from .models import UserModel
 class PostForm(forms.Form):
     # froms.Form 을 상속받습니다.
 
@@ -9,11 +10,12 @@ class PostForm(forms.Form):
 
 class UserForm(forms.ModelForm):
     class Meta:
-        model =User
-        fields = ['username','email','password']
+        model =UserModel
+        fields = ['username','email','password1','password2']
+        widgets ={"password1":PasswordInput(),"password2":PasswordInput()}
         help_texts={'username':None}
 
-class UserForm3(forms.ModelForm):
+class UserForm2(forms.ModelForm):
     class Meta:
         model =User
         fields = ['username','email','password']
