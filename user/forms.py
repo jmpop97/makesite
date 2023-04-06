@@ -11,3 +11,14 @@ class UserForm(forms.ModelForm):
     class Meta:
         model =User
         fields = ['username','email','password']
+        help_texts={'username':None}
+
+class UserForm3(forms.ModelForm):
+    class Meta:
+        model =User
+        fields = ['username','email','password']
+        help_texts={'username':None}
+class UserForm1(forms.Form):
+    name = forms.CharField(max_length=15)
+    email = forms.EmailField(max_length=20)
+    message = forms.CharField(widget=forms.Textarea)
