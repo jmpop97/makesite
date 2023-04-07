@@ -1,13 +1,10 @@
 from django.db import models
-
+from user.models import UserModel
 # Create your models here.
 
-class Product(models.Model):
-    code ="a"
-    name ="a"
-    description ="A"
-    price ="A"
-    sizes = {'S':'Small',
-             'M':'Medium',
-             'L':'Large',
-             'F':'Free'}
+class Products(models.Model):
+
+    class Meta:
+        db_table="products"
+
+    username = models.CharField(max_length=30, unique=True)
