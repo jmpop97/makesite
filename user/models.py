@@ -8,8 +8,15 @@ class PostForm(forms.Form):
     content = forms.CharField(label="내용", widget=forms.Textarea)
 
 class UserModel(models.Model):
-    username = models.CharField(max_length=20)
-    email = models.CharField(max_length=20)
+    class Meta:
+        db_table="my_user"
+    username = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(max_length=50, unique=True)
+    password = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at= models.DateTimeField(auto_now=True)
+class UserModelCheck(UserModel):
     password1 = models.CharField(max_length=20)
     password2 = models.CharField(max_length=20)
+
 # Create your models here.
