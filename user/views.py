@@ -16,8 +16,12 @@ from django.http import HttpResponse
 
 def signup(request):
     form=UserForm()
+    print("work")
+
     if request.method == "POST":  # 1
+        print("work1")
         form_check = UserForm(request.POST)
+
         if form_check.is_valid():  # 2
 
             password1 = form_check.cleaned_data['password1']
@@ -27,7 +31,7 @@ def signup(request):
                 new_user.username = form_check.cleaned_data['username']
                 new_user.email = form_check.cleaned_data['email']
                 new_user.password=password1
-
+                new_user.save()
                 return render(request,'base.html')
         else:
             print(form_check.errors)
