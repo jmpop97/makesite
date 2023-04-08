@@ -8,6 +8,7 @@ class Products(models.Model):
         db_table="products"
 
     producter = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
     code = models.BigAutoField(primary_key=True)
     description = models.TextField()
     prise = models.PositiveBigIntegerField()
