@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput
-from .models import UserModelCheck
+from .models import UserModelCheck , UserModel
 
 
 # class PostForm(forms.Form):
@@ -15,6 +15,12 @@ class UserForm(forms.ModelForm):
         model =UserModelCheck
         fields = ['username','email','password1','password2']
         widgets ={"password1":PasswordInput(),"password2":PasswordInput()}
+        help_texts={}
+class LogInForm(forms.ModelForm):
+    class Meta:
+        model =UserModel
+        fields = ['username','password']
+        widgets = {"password": PasswordInput()}
         help_texts={}
 
 class UserForm2(forms.ModelForm):
